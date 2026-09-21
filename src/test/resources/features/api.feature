@@ -1,4 +1,4 @@
-@AUTOMATION_API
+@AUTOMATION_API @RETO
 Feature: Pruebas API en reqres.in
   Como QA quiero validar endpoints básicos en reqres.in
 
