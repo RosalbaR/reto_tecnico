@@ -1,39 +1,36 @@
 package com.example.api.tasks;
 
-import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
-import org.json.JSONObject;
+import net.serenitybdd.screenplay.rest.interactions.Post;
 
-// Task que crea un nuevo usuario mediante el endpoint POST /api/users.
-// Se usa para validar la creación de recursos y la estructura de la respuesta.
+import java.util.HashMap;
+import java.util.Map;
+
 public class CreateUser implements Task {
 
     private final String name;
     private final String job;
 
-    // Constructor con nombre y trabajo del usuario a crear.
     public CreateUser(String name, String job) {
         this.name = name;
         this.job = job;
     }
 
-    // performAs arma el JSON y ejecuta la petición HTTP de creación.
     @Override
     public <T extends Actor> void performAs(T actor) {
-        JSONObject payload = new JSONObject();
+        Map<String, String> payload = new HashMap<>();
         payload.put("name", name);
         payload.put("job", job);
 
-        SerenityRest.given()
-                .header("Content-Type", "application/json")
-                .body(payload.toString())
-                .when()
-                .post("/api/users")
-                .then();
+        actor.attemptsTo(
+                Post.to("/api/users")
+                        .with(request -> request
+                                .header("Content-Type", "application/json")
+                                .body(payload))
+        );
     }
 
-    // Factory method para una lectura más clara en Gherkin/step definitions.
     public static CreateUser withNameAndJob(String name, String job) {
         return new CreateUser(name, job);
     }

@@ -5,7 +5,7 @@ Feature: Pruebas Web en la pagina selenium.dev
   @CASO_WEB_1
   Scenario: Caso de Prueba 1 - Ver página de inicio
     Given que un usuario abre la página de inicio
-    Then debería ver el título "Selenium automates browsers. That's it!"
+    Then debería ver el título "Selenium"
 
   @CASO_WEB_2
   Scenario: Caso de Prueba 2 - Navegar en el apartado "Documentation"

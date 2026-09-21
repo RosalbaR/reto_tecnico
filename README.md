@@ -51,6 +51,29 @@ mvn test
 
 El comando puede ejecutarse desde la raiz del proyecto.
 
+### Ejecucion por tags
+
+El runner ejecuta los escenarios con las etiquetas `@AUTOMATION_WEB` y
+`@AUTOMATION_API`. Para ejecutar una suite especifica:
+
+```bash
+mvn -Dtest=RunnerTest -Dcucumber.filter.tags="@AUTOMATION_API" test
+mvn -Dtest=RunnerTest -Dcucumber.filter.tags="@AUTOMATION_WEB" test
+```
+
+Para ejecutar un caso individual:
+
+```bash
+mvn -Dtest=RunnerTest -Dcucumber.filter.tags="@CASO_API_1" test
+```
+
+La ejecución está configurada de forma secuencial: se ejecuta un escenario,
+termina y luego comienza el siguiente. Para ejecutar los tres casos web:
+
+```bash
+mvn -Dtest=RunnerTest -Dcucumber.filter.tags="@AUTOMATION_WEB" test
+```
+
 ## Reportes Serenity BDD
 
 Despues de ejecutar las pruebas, abrir:
